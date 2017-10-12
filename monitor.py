@@ -27,7 +27,7 @@ def send_readings():
     temp = sensor.read_temperature()
     humidity = sensor.read_humidity()
 
-    payload = {'device_id', DEVICE_ID,
+    payload = {'device_id': DEVICE_ID,
         'activity': random.choice([True, False]),
         'humidity': humidity, 'temp': temp}
 
