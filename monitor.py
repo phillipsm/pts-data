@@ -51,7 +51,7 @@ def send_readings():
 
     # Connect and subscribe to AWS IoT
     myAWSIoTMQTTClient.connect()
-    myAWSIoTMQTTClient.publishAsync(TOPIC, json.dumps(payload), 1)
+    myAWSIoTMQTTClient.publishAsync(TOPIC, json.dumps(paysload), 1)
 
     print json.dumps(payload)
 
