@@ -29,7 +29,7 @@ def send_readings():
 
     payload = {'device_id': DEVICE_ID,
         'activity': random.choice([True, False]),
-        'humidity': humidity, 'temp': temp}
+        'humidity': round(humidity, 2), 'temp': round(temp, 2)}
 
     # Configure aws iot
     # General message notification callback
@@ -50,7 +50,7 @@ def send_readings():
         print("++++++++++++++\n\n")
 
     logger = logging.getLogger("AWSIoTPythonSDK.core")
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.WARN)
     streamHandler = logging.StreamHandler()
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     streamHandler.setFormatter(formatter)
@@ -70,13 +70,7 @@ def send_readings():
 
     # Connect and subscribe to AWS IoT
     myAWSIoTMQTTClient.connect()
-    myAWSIoTMQTTClient.subscribeAsync(TOPIC, 1, ackCallback=customSubackCallback)
-    myAWSIoTMQTTClient.publishAsync(TOPIC, json.dumps(payload), 1, ackCallback=customSubackCallback)
-
-    print json.dumps(payload)
-
-send_readings()
-
+    myAWSIoTMQTTClient.publishAsync(TOPIC, json.dumps(payload), 1)
 
 sched = BlockingScheduler()
 sched.add_job(send_readings, 'interval', seconds=15)
