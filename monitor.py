@@ -71,9 +71,12 @@ def send_readings():
     # Connect and subscribe to AWS IoT
     myAWSIoTMQTTClient.connect()
     myAWSIoTMQTTClient.subscribeAsync(TOPIC, 1, ackCallback=customSubackCallback)
-    myAWSIoTMQTTClient.publishAsync(TOPIC, json.dumps(paysload), 1, ackCallback=customSubackCallback)
+    myAWSIoTMQTTClient.publishAsync(TOPIC, json.dumps(payload), 1, ackCallback=customSubackCallback)
 
     print json.dumps(payload)
+
+send_readings()
+
 
 sched = BlockingScheduler()
 sched.add_job(send_readings, 'interval', seconds=15)
