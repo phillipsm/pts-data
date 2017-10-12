@@ -1,3 +1,5 @@
+import random, json
+
 from Adafruit_SHT31 import *
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -12,12 +14,12 @@ def send_readings():
     sensor = SHT31(address = TEMPHUM_ADDRESS)
     temp = sensor.read_temperature()
     humidity = sensor.read_humidity()
-
-    payload = ['activity': random.choice([True, False]),
-        'humidity': humidity, 'temp': temp]
+    
+    payload = {'activity': random.choice([True, False]),
+        'humidity': humidity, 'temp': temp}
 
     print json.dumps(payload)
 
 sched = BlockingScheduler()
-sched.add_job(send_readings, 'interval', minutes=15)
+sched.add_job(send_readings, 'interval', seconds=1)
 sched.start()
