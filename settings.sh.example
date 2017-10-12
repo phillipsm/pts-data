@@ -7,3 +7,4 @@ export CERT_PATH=your_value
 export PRIVATE_KEY_PATH=your_value
 export CLIENT_ID=basicPubSub
 export TOPIC=your_value
+export DEVICE_ID=your_value

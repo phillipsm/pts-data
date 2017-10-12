@@ -20,13 +20,15 @@ CERT_PATH = environ['CERT_PATH']
 PRIVATE_KEY_PATH = environ['PRIVATE_KEY_PATH']
 CLIENT_ID = environ['CLIENT_ID']
 TOPIC = environ['TOPIC']
+DEVICE_ID = environ['DEVICE_ID']
 
 def send_readings():
     sensor = SHT31(address = TEMPHUM_ADDRESS)
     temp = sensor.read_temperature()
     humidity = sensor.read_humidity()
 
-    payload = {'activity': random.choice([True, False]),
+    payload = {'device_id', DEVICE_ID,
+        'activity': random.choice([True, False]),
         'humidity': humidity, 'temp': temp}
 
     # Configure aws iot
