@@ -73,5 +73,5 @@ def send_readings():
     myAWSIoTMQTTClient.publishAsync(TOPIC, json.dumps(payload), 1)
 
 sched = BlockingScheduler()
-sched.add_job(send_readings, 'interval', seconds=15)
+sched.add_job(send_readings, 'interval', minutes=15)
 sched.start()
