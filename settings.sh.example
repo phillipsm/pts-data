@@ -5,5 +5,5 @@ export IOT_HOST=your_value
 export ROOT_CA_PATH=your_value
 export CERT_PATH=your_value
 export PRIVATE_KEY_PATH=your_value
-export CLIENT_ID=your_value
+export CLIENT_ID=basicPubSub
 export TOPIC=your_value
